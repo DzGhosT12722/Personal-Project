@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <header class="skewed-header">
+        <h1>Welcome to my Website</h1>
+    </header>
+
+    <div class="login-form">
+        <form id="loginForm">
+            <div class="imgcontainer">
+                <img src="photo.jpg" alt="Avatar" class="avatar">
+            </div>
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <span class="psw"><a href="#">Forgot password?</a></span>
+            </div>
+        </form>
+    </div>
+    
+    <div class="media-container">
+        <audio id="audio" controls>
+            <source src="128-Kya Hua Tera Vada - Hum Kisise Kum Naheen 128 Kbps.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="video-container">
+            <video width="600" controls>
+                <source src="video.mp4" type="video/mp4">
+                <source src="movie.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <footer class="curve-footer">
+        <p>This is My Website (just for demo)</p>
+    </footer>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const username = document.getElementById("uname").value;
+            const password = document.getElementById("psw").value;
+            
+            const response = await fetch("http://localhost:5000/login", { // Updated backend port
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ username, password })
+            });
+            
+            const result = await response.json();
+            if (response.ok) {
+                alert("Login Successful!");
+                window.location.href = "dashboard.html"; // Redirect on success
+            } else {
+                alert(result.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Carousel</title>
+  <style>
+    /* Carousel container */
+    .carousel {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    /* Carousel slides */
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 400px; /* Adjust height as needed */
+      object-fit: cover; /* Ensures proper fitting */
+      display: block;
+    }
+
+    /* Carousel navigation buttons */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .carousel-button-prev {
+      left: 10px;
+    }
+
+    .carousel-button-next {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Carousel Container -->
+  <div class="carousel">
+    <div class="carousel-slides">
+      <div class="carousel-slide">
+        <img src="1.avif" alt="Slide 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="2.avif" alt="Slide 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="3.avif" alt="Slide 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="4.avif" alt="Slide 4">
+      </div>
+      <div class="carousel-slide">
+        <img src="5.avif" alt="Slide 5">
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button class="carousel-button carousel-button-prev" onclick="prevSlide()">&lt;</button>
+    <button class="carousel-button carousel-button-next" onclick="nextSlide()">&gt;</button>
+  </div>
+
+  <!-- JavaScript for Carousel Functionality -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      if (index >= totalSlides) {
+        currentSlide = 0;
+      } else if (index < 0) {
+        currentSlide = totalSlides - 1;
+      } else {
+        currentSlide = index;
+      }
+      const offset = -currentSlide * 100;
+      document.querySelector('.carousel-slides').style.transform = `translateX(${offset}%)`;
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    // Auto-slide every 3 seconds
+    setInterval(nextSlide, 3000);
+
+    // Initial slide
+    showSlide(currentSlide);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Parth Chavan</title>
+        <style>
+            body{
+                margin:0;
+                font-family: Arial, sans-serif;
+                color: #333;
+                background-size: cover;
+                overflow-x: hidden;
+            }
+            .header{
+                text-align:center;
+                color: #000000;
+                font-family: Arial, sans-serif;
+                animation-name: slideInDown;
+                position:fixed;
+                top: 0;                        
+            }
+            .footer{
+                position: fixed;
+                bottom: 0;
+                animation-name: slideInUp;
+            }
+            .header, .footer{
+                background: rgba(255, 255, 255, 0.8);
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                animation-duration: 1s;
+                animation-fill-mode: both;
+            }
+            @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .back-video{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        @media(min-aspect-ratio : 16/9){
+            .back-video{
+                width: 100%;
+                height: auto;
+            }
+        }
+        @media(max-aspect-ratio : 16/9){
+            .back-video{
+                width: auto;
+                height: 100%;
+            }
+        }
+        </style>
+    </head>
+    <body>
+
+    <div class="header">
+        <h1>Welcome to my Website</h1>
+        <nav>
+            <a href="HomePage/home.html">Home</a> |
+            <a href="About/about.html">About</a> |
+            <a href="LoginPage/index.html">Login</a> |
+            <a href="contact.html">Contact</a> 
+        </nav>     
+    </div>
+    <video autoplay muted loop plays-inline class="back-video">
+        <source src="Images&videos/nissan-gt-r35-liberty-walk-moewalls-com.mp4" type="video/mp4">
+    </video>
+
+    <div class="footer">        
+        <b><p class="bottom">Hello there, you must be thinking how I gave these effects right!</p></b><br>
+        <b><p class="HUE">Well that's a secret</p></b>
+    </div>
+    </body>
