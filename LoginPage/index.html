@@ -21,7 +21,7 @@
                 <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-                <button type="submit">Login</button>
+                <button onclick="loginUser()">Login</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
@@ -52,27 +52,35 @@
     </footer>
 
     <script>
-        document.getElementById("loginForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            const username = document.getElementById("uname").value;
-            const password = document.getElementById("psw").value;
-            
-            const response = await fetch("http://localhost:5000/login", { // Updated backend port
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ username, password })
-            });
-            
-            const result = await response.json();
-            if (response.ok) {
-                alert("Login Successful!");
-                window.location.href = "dashboard.html"; // Redirect on success
-            } else {
-                alert(result.message);
-            }
-        });
+        async function loginUser() {
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+const res = await fetch("http://localhost:5000/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ email, password })
+});
+
+const data = await res.json();
+alert(data.message);
+}
+
+
+async function showLastLogin() {
+const res = await fetch("http://localhost:5000/last-login", {
+    credentials: "include"
+});
+
+const data = await res.json();
+
+if (data.lastUser) {
+    console.log("Last login:", data.lastUser);
+}
+}
+
+showLastLogin();
     </script>
 </body>
 </html>
